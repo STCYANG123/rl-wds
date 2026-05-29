@@ -118,7 +118,7 @@ class environment_wrapper(param.Parameterized):
                 pipe_z.append(pipe.to_node.elevation)
                 pipe_z.append(float('nan'))
         for pump in wds.pumps:
-            if (pipe.from_node.index in list(wds.junctions.index)) and (pipe.to_node.index in list(wds.junctions.index)):
+            if (pump.from_node.index in list(wds.junctions.index)) and (pump.to_node.index in list(wds.junctions.index)):
                 pipe_x.append(pump.from_node.coordinates[0])
                 pipe_x.append(pump.to_node.coordinates[0])
                 pipe_x.append(float('nan'))
@@ -131,7 +131,7 @@ class environment_wrapper(param.Parameterized):
                 pipe_z.append(pump.to_node.elevation)
                 pipe_z.append(float('nan'))
         for valve in wds.valves:
-            if (pipe.from_node.index in list(wds.junctions.index)) and (pipe.to_node.index in list(wds.junctions.index)):
+            if (valve.from_node.index in list(wds.junctions.index)) and (valve.to_node.index in list(wds.junctions.index)):
                 pipe_x.append(valve.from_node.coordinates[0])
                 pipe_x.append(valve.to_node.coordinates[0])
                 pipe_x.append(float('nan'))
@@ -166,7 +166,7 @@ class environment_wrapper(param.Parameterized):
             with open(pathToParams, 'r') as fin:
                 self.hparams = yaml.load(fin, Loader=yaml.Loader)
             self.pathToModel = os.path.join('experiments', 'models', model_fn+'.zip')
-            self.model = DQN.load(wrapper.pathToModel)
+            self.model = DQN.load(self.pathToModel)
             
             self.loaded_wds = wds_name
 
